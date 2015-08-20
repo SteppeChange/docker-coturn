@@ -22,4 +22,4 @@ world and Docker's lack of range-based port mapping (https://github.com/docker/d
 
 To run this container:
 
-    $ docker run -d synctree/coturn:latest
+    $ docker run -d ogolosovskiy/coturn:latest
