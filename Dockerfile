@@ -11,8 +11,17 @@ RUN apt-get update && \
             curl \
             procps \
             --no-install-recommends
+RUN mkdir -p /usr/local/coturn/etc && \
+    mkdir -p /usr/local/coturn/var/log && \
+    mv /etc/turnserver.conf /usr/local/coturn/etc/ && \
+    mv /etc/turnuserdb.conf /usr/local/coturn/etc/
 
-ADD turnserver.sh /turnserver.sh
+
+# ADD turnserver.sh /turnserver.sh
+
+VOLUME /usr/local/coturn/ 
 
 EXPOSE 3478 3478/udp
-CMD ["/bin/sh", "/turnserver.sh"]
+# CMD ["/bin/sh", "/usr/bin/turnserver -c /usr/local/coturn/etc/turnserver.conf"]
+CMD ["/bin/bash", "-c", "/usr/bin/turnserver -c /usr/local/coturn/etc/turnserver.conf"]
+
