@@ -6,15 +6,15 @@ https://github.com/coturn/coturn
 
 ## Simple install
 
-Create image:
-*docker build --rm --no-cache=true -t ogolosovskiy/docker-coturn ./*
-Create container and run:
-*docker run -d -t ogolosovskiy/docker-coturn*
-Check inside:
-*docker exec -it -t ogolosovskiy/docker-coturn /bin/bash*
-Check volume path:
-*docker inspect ogolosovskiy/docker-coturn*
-
+Create image:  
+*docker build --rm --no-cache=true -t ogolosovskiy/docker-coturn ./*  
+Create container and run:  
+*docker run -d -t ogolosovskiy/docker-coturn*  
+Check inside:  
+*docker exec -it -t ogolosovskiy/docker-coturn /bin/bash*  
+Check volume path:  
+*docker inspect ogolosovskiy/docker-coturn*  
+  
 Configure:
 */var/lib/docker/vfs/dir/_uid_volume_/etc/turnserver.conf*
 Options:
