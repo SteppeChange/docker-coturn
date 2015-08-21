@@ -23,6 +23,12 @@ Options:
 How to check ext ip:  
 *curl http://icanhazip.com*  
   
+Amazon host port forwarding:  
+Ports         Protocol  
+30000-60000   udp  
+3478          tcp    
+3478          udp  
+
 Docker restart && Enjoy !!!!
 
 ## Advanced:
