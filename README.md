@@ -15,14 +15,14 @@ Check inside:
 Check volume path:  
 *docker inspect ogolosovskiy/docker-coturn*  
   
-Configure:
-*/var/lib/docker/vfs/dir/_uid_volume_/etc/turnserver.conf*
-Options:
-*log-file=/opt/coturn/var/log/turn.log*
-*external-ip=52.4.244.208*
-How to check ext ip:
-*curl http://icanhazip.com*
-
+Configure:  
+*/var/lib/docker/vfs/dir/_uid_volume_/etc/turnserver.conf*  
+Options:  
+*log-file=/opt/coturn/var/log/turn.log*  
+*external-ip=52.4.244.208*  
+How to check ext ip:  
+*curl http://icanhazip.com*  
+  
 Docker restart && Enjoy !!!!
 
 ## Advanced:
