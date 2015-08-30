@@ -4,23 +4,49 @@ MAINTAINER Mike Dillon <ogolosovskiy@gmail.com>
 # XXX: Workaround for https://github.com/docker/docker/issues/6345
 RUN ln -s -f /bin/true /usr/bin/chfn
 
+#base
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y \
-            coturn \
+    	    apt-utils \
+	    sudo \
             curl \
             procps \
             --no-install-recommends
-RUN mkdir -p /opt/coturn/etc && \
-    mkdir -p /opt/coturn/var/log && \
-    mv /etc/turnserver.conf /opt/coturn/etc/ && \
-    mv /etc/turnuserdb.conf /opt/coturn/etc/
 
-# ADD turnserver.sh /turnserver.sh
+# coTurn + mongo driver pre req
+RUN yes | apt-get install \
+    	    build-essential \
+	    automake \
+	    autoconf \
+	    libtool \
+	    libssl-dev \
+	    libevent-dev \
+	    git
+
+# install driver
+RUN git clone https://github.com/mongodb/mongo-c-driver.git && \
+    cd mongo-c-driver && \
+    ./autogen.sh && \
+    make && \
+    sudo make install && \
+    cd ~
+
+
+# install coTurn
+RUN cd ~ && \
+    git clone https://github.com/ogolosovskiy/coturn.git && \
+    cd coturn && \
+    ./configure && \
+    make && \
+    sudo make install && \
+    mkdir -p /opt/coturn/etc && \
+    mkdir -p /opt/coturn/var/log && \
+    mv ./mac/turnserver.conf /opt/coturn/etc/ 
 
 VOLUME /opt/coturn/ 
 
+
 EXPOSE 3478 3478/udp
-# CMD ["/bin/sh", "/usr/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
 CMD ["/bin/bash", "-c", "/usr/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
 
