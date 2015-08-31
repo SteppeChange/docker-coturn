@@ -25,7 +25,8 @@ RUN yes | apt-get install \
 	    git
 
 # install driver
-RUN git clone https://github.com/mongodb/mongo-c-driver.git && \
+RUN cd ~ && \
+    git clone https://github.com/mongodb/mongo-c-driver.git && \
     cd mongo-c-driver && \
     ./autogen.sh && \
     make && \
@@ -42,11 +43,12 @@ RUN cd ~ && \
     sudo make install && \
     mkdir -p /opt/coturn/etc && \
     mkdir -p /opt/coturn/var/log && \
-    mv ./mac/turnserver.conf /opt/coturn/etc/ 
+    mv ./mac/turnserver.conf /opt/coturn/etc/ && \
+    cd ~
 
 VOLUME /opt/coturn/ 
 
 
 EXPOSE 3478 3478/udp
-CMD ["/bin/bash", "-c", "/usr/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
 
