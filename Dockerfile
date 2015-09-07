@@ -48,10 +48,10 @@ RUN cd ~ && \
 
 VOLUME /opt/coturn/ 
 
-declare -x EXTERNAL_IP="79.173.86.242"
-declare -x MIN_PORT=40000
-declare -x MAX_PORT=50000
-declare -x MONGO_USERDB="mongodb://writer:XXXXXXX@c916.candidate.21.mongolayer.com:10916/b2"
+ENV EXTERNAL_IP="79.173.86.242"
+ENV MIN_PORT=40000
+ENV MAX_PORT=50000
+ENV MONGO_USERDB="mongodb://writer:XXXXXXXX@c916.candidate.21.mongolayer.com:10916/b2"
 
 EXPOSE 3478 3478/udp
 CMD ["/bin/bash", "-c", "/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
