@@ -47,12 +47,21 @@ RUN cd ~ && \
     cd ~
 
 VOLUME /opt/coturn/ 
-
-ENV EXTERNAL_IP="79.173.86.242"
+
 ENV MIN_PORT=40000
 ENV MAX_PORT=50000
 ENV MONGO_USERDB="mongodb://writer:XXXXXXXX@c916.candidate.21.mongolayer.com:10916/b2"
 
+#setup External IP
+ADD external_ip.sh /root/external_ip.sh
+RUN cd ~ && \
+    ./external_ip.sh
+
 EXPOSE 3478 3478/udp
+
 CMD ["/bin/bash", "-c", "/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
+
+
+
+
 
