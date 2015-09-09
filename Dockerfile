@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Mike Dillon <ogolosovskiy@gmail.com>
+MAINTAINER Oleg Golsosvskiy <ogolosovskiy@gmail.com>
 
 # XXX: Workaround for https://github.com/docker/docker/issues/6345
 RUN ln -s -f /bin/true /usr/bin/chfn
@@ -46,8 +46,14 @@ RUN cd ~ && \
     mv ./mac/turnserver.conf /opt/coturn/etc/ && \
     cd ~
 
+#setup syslog-ng
+RUN cd ~ && \
+    apt-get install -y syslog-ng
+ADD ./turn_log.conf /etc/syslog-ng/conf.d/
+# RUN sudo service syslog-ng restart
+
 VOLUME /opt/coturn/ 
-
+
 ENV MIN_PORT=40000
 ENV MAX_PORT=50000
 ENV MONGO_USERDB="mongodb://writer:XXXXXXXX@c916.candidate.21.mongolayer.com:10916/b2"
