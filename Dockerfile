@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM phusion/baseimage:0.9.14
 MAINTAINER Oleg Golsosvskiy <ogolosovskiy@gmail.com>
 
 # XXX: Workaround for https://github.com/docker/docker/issues/6345
@@ -48,9 +48,10 @@ RUN cd ~ && \
 
 #setup syslog-ng
 RUN cd ~ && \
-    apt-get install -y syslog-ng
+    apt-get install -y syslog-ng && \
+    echo "SYSLOGNG_OPTS=\"--no-caps\"" >> /etc/default/syslog-ng
 ADD ./turn_log.conf /etc/syslog-ng/conf.d/
-# RUN sudo service syslog-ng restart
+RUN sudo service syslog-ng restart
 
 VOLUME /opt/coturn/ 
 
