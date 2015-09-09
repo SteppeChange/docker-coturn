@@ -48,10 +48,11 @@ RUN cd ~ && \
 
 #setup syslog-ng
 RUN cd ~ && \
-    apt-get install -y syslog-ng && \
-    echo "SYSLOGNG_OPTS=\"--no-caps\"" >> /etc/default/syslog-ng
+    apt-get install -y syslog-ng-core 
+
+#RUN echo "SYSLOGNG_OPTS=\"--no-caps\"" >> /etc/default/syslog-ng
 ADD ./turn_log.conf /etc/syslog-ng/conf.d/
-RUN sudo service syslog-ng restart
+#RUN  sudo /usr/sbin/syslog-ng --no-caps
 
 VOLUME /opt/coturn/ 
 
@@ -66,7 +67,7 @@ RUN cd ~ && \
 
 EXPOSE 3478 3478/udp
 
-CMD ["/bin/bash", "-c", "/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
+CMD ["/bin/bash", "-c", "service syslog-ng start &&  /usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf"]
 
 
 
