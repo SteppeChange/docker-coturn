@@ -24,19 +24,9 @@ RUN yes | apt-get install \
 	    libevent-dev \
 	    git
 
-# install driver
-RUN cd ~ && \
-    git clone https://github.com/mongodb/mongo-c-driver.git && \
-    cd mongo-c-driver && \
-    ./autogen.sh && \
-    make && \
-    sudo make install && \
-    cd ~
-
-
 # install coTurn
 RUN cd ~ && \
-    git clone https://github.com/ogolosovskiy/coturn.git && \
+    git clone https://github.com/SteppeChange/coturn.git && \
     cd coturn && \
     ./configure && \
     make && \
@@ -58,7 +48,6 @@ VOLUME /opt/coturn/
 
 ENV MIN_PORT=40000
 ENV MAX_PORT=50000
-ENV MONGO_USERDB="mongodb://writer:XXXDockfileXXX@c916.candidate.21.mongolayer.com:10916/b2"
 
 ADD turn.sh /root/turn.sh
 
