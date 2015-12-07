@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y \
     	    apt-utils \
 	    sudo \
-            curl \
+            libcurl-dev \
             procps \
             --no-install-recommends
 
