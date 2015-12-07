@@ -10,7 +10,6 @@ RUN apt-get update && \
     apt-get install -y \
     	    apt-utils \
 	    sudo \
-            libcurl-dev \
             procps \
             --no-install-recommends
 
@@ -22,6 +21,8 @@ RUN yes | apt-get install \
 	    libtool \
 	    libssl-dev \
 	    libevent-dev \
+            libyajl-dev	 \
+            libcurl4-openssl-dev \
 	    git
 
 # install coTurn
