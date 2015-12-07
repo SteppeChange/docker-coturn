@@ -28,6 +28,8 @@ RUN yes | apt-get install \
 RUN cd ~ && \
     git clone https://github.com/SteppeChange/coturn.git && \
     cd coturn && \
+    git submodule init && \
+    git submodule update && \
     ./configure && \
     make && \
     sudo make install && \
