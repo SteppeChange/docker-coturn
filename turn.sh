@@ -40,5 +40,5 @@ fi
 
 # service syslog-ng start
 
-#/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf
+/usr/local/bin/turnserver -c /opt/coturn/etc/turnserver.conf
 
